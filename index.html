@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>皮索尼法式小館 | Pisoni 法式料理</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --color-cream: #FAF6F0;
+      --color-gold: #C9A96E;
+      --color-gold-light: #E8D5B0;
+      --color-burgundy: #722F37;
+      --color-navy: #1B2A4A;
+      --color-text: #2C2C2C;
+      --color-text-light: #666666;
+      --font-heading: 'Playfair Display', serif;
+      --font-body: 'Noto Sans TC', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--color-cream);
+      color: var(--color-text);
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: color 0.3s ease;
+    }
+
+    /* ===== Navigation ===== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.6), transparent);
+      transition: background 0.3s ease;
+    }
+
+    .navbar.scrolled {
+      background: rgba(27, 42, 74, 0.95);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-logo {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      color: #fff;
+      letter-spacing: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #fff;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--color-gold);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-reserve {
+      padding: 0.5rem 1.5rem;
+      border: 1px solid var(--color-gold);
+      color: var(--color-gold) !important;
+      transition: all 0.3s ease !important;
+    }
+
+    .nav-reserve:hover {
+      background: var(--color-gold);
+      color: var(--color-navy) !important;
+    }
+
+    .nav-reserve::after {
+      display: none !important;
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    .menu-toggle span {
+      width: 25px;
+      height: 2px;
+      background: #fff;
+      transition: all 0.3s ease;
+    }
+
+    /* ===== Hero Section ===== */
+    .hero {
+      height: 100vh;
+      min-height: 600px;
+      background: linear-gradient(rgba(27, 42, 74, 0.5), rgba(27, 42, 74, 0.5)),
+                  url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #fff;
+      position: relative;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 150px;
+      background: linear-gradient(to top, var(--color-cream), transparent);
+    }
+
+    .hero-badge {
+      font-size: 0.85rem;
+      letter-spacing: 4px;
+      color: var(--color-gold);
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 400;
+      letter-spacing: 8px;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-heading);
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--color-gold-light);
+      letter-spacing: 3px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-tagline {
+      font-size: 1.1rem;
+      letter-spacing: 6px;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 3rem;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      padding: 1rem 3rem;
+      background: var(--color-gold);
+      color: var(--color-navy);
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .hero-cta:hover {
+      background: #fff;
+      transform: translateY(-2px);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--color-navy);
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      z-index: 2;
+    }
+
+    .scroll-indicator::after {
+      content: '';
+      width: 1px;
+      height: 40px;
+      background: var(--color-gold);
+      animation: scrollLine 1.5s ease-in-out infinite;
+    }
+
+    @keyframes scrollLine {
+      0%, 100% { transform: scaleY(0.5); opacity: 0.3; }
+      50% { transform: scaleY(1); opacity: 1; }
+    }
+
+    /* ===== Section Common ===== */
+    .section {
+      padding: 6rem 2rem;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-label {
+      font-size: 0.8rem;
+      letter-spacing: 4px;
+      color: var(--color-gold);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      color: var(--color-navy);
+      margin-bottom: 1rem;
+    }
+
+    .section-line {
+      width: 60px;
+      height: 1px;
+      background: var(--color-gold);
+      margin: 1.5rem auto;
+    }
+
+    .section-desc {
+      max-width: 600px;
+      margin: 0 auto;
+      color: var(--color-text-light);
+      font-size: 0.95rem;
+    }
+
+    /* ===== About Section ===== */
+    .about {
+      background: #fff;
+    }
+
+    .about-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-image {
+      position: relative;
+    }
+
+    .about-image img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+    }
+
+    .about-image::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      right: 20px;
+      bottom: 20px;
+      border: 1px solid var(--color-gold);
+      z-index: -1;
+    }
+
+    .about-content {
+      padding: 1rem 0;
+    }
+
+    .about-content .section-label {
+      text-align: left;
+    }
+
+    .about-content h2 {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      font-weight: 400;
+      color: var(--color-navy);
+      margin-bottom: 1.5rem;
+    }
+
+    .about-content p {
+      color: var(--color-text-light);
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    .about-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--color-gold-light);
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--color-gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-gold);
+      font-size: 1rem;
+    }
+
+    .feature-text {
+      font-size: 0.9rem;
+      color: var(--color-navy);
+    }
+
+    /* ===== Menu Section ===== */
+    .menu {
+      background: var(--color-cream);
+    }
+
+    .menu-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+    }
+
+    .menu-card {
+      background: #fff;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(27, 42, 74, 0.1);
+    }
+
+    .menu-image {
+      aspect-ratio: 1;
+      overflow: hidden;
+    }
+
+    .menu-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .menu-card:hover .menu-image img {
+      transform: scale(1.05);
+    }
+
+    .menu-info {
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .menu-category {
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      color: var(--color-gold);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .menu-name {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      color: var(--color-navy);
+      margin-bottom: 0.8rem;
+    }
+
+    .menu-desc {
+      font-size: 0.85rem;
+      color: var(--color-text-light);
+      line-height: 1.7;
+    }
+
+    /* ===== Contact Section ===== */
+    .contact {
+      background: var(--color-navy);
+      color: #fff;
+    }
+
+    .contact .section-label {
+      color: var(--color-gold);
+    }
+
+    .contact .section-title {
+      color: #fff;
+    }
+
+    .contact .section-desc {
+      color: rgba(255,255,255,0.7);
+    }
+
+    .contact-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+      text-align: center;
+    }
+
+    .contact-item {
+      padding: 2rem;
+    }
+
+    .contact-icon {
+      width: 60px;
+      height: 60px;
+      border: 1px solid var(--color-gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      color: var(--color-gold);
+      font-size: 1.3rem;
+    }
+
+    .contact-label {
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      color: var(--color-gold);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .contact-value {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.9);
+    }
+
+    /* ===== Map Section ===== */
+    .map-section {
+      height: 400px;
+      background: linear-gradient(rgba(27, 42, 74, 0.3), rgba(27, 42, 74, 0.3)),
+                  url('https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=1920&q=80') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .map-overlay {
+      background: #fff;
+      padding: 3rem;
+      text-align: center;
+      max-width: 400px;
+    }
+
+    .map-overlay h3 {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      color: var(--color-navy);
+      margin-bottom: 1rem;
+    }
+
+    .map-overlay p {
+      color: var(--color-text-light);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .map-btn {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      background: var(--color-navy);
+      color: #fff;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      transition: background 0.3s ease;
+    }
+
+    .map-btn:hover {
+      background: var(--color-burgundy);
+    }
+
+    /* ===== Footer ===== */
+    .footer {
+      background: #0f1a2e;
+      color: rgba(255,255,255,0.7);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      color: #fff;
+      margin-bottom: 1rem;
+      letter-spacing: 3px;
+    }
+
+    .footer-tagline {
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      color: var(--color-gold);
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--color-gold);
+    }
+
+    .footer-copyright {
+      font-size: 0.8rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 1024px) {
+      .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 800px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        max-width: 300px;
+        height: 100vh;
+        background: var(--color-navy);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        transition: right 0.3s ease;
+      }
+
+      .nav-links.active {
+        right: 0;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+      }
+
+      .about-container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .about-image {
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      .about-content {
+        text-align: center;
+      }
+
+      .about-content .section-label {
+        text-align: center;
+      }
+
+      .about-features {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .menu-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .contact-item {
+        padding: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .section {
+        padding: 4rem 1.5rem;
+      }
+
+      .hero-tagline {
+        letter-spacing: 3px;
+        font-size: 0.95rem;
+      }
+
+      .about-image::before {
+        top: -10px;
+        left: -10px;
+        right: 10px;
+        bottom: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">Pisoni</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">品牌故事</a></li>
+      <li><a href="#menu">招牌菜色</a></li>
+      <li><a href="#contact">聯絡我們</a></li>
+      <li><a href="#contact" class="nav-reserve">立即訂位</a></li>
+    </ul>
+    <div class="menu-toggle" id="menuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-badge">法式餐酒館</div>
+    <h1 class="hero-title">皮索尼法式小館</h1>
+    <p class="hero-subtitle">Pisoni French Bistro</p>
+    <p class="hero-tagline">優雅法式生活</p>
+    <a href="#contact" class="hero-cta">預約訂位</a>
+    <div class="scroll-indicator">
+      <span>SCROLL</span>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="section about" id="about">
+    <div class="about-container">
+      <div class="about-image">
+        <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&q=80" alt="皮索尼法式小館內部">
+      </div>
+      <div class="about-content">
+        <div class="section-label">OUR STORY</div>
+        <h2>品味法式的優雅時光</h2>
+        <p>皮索尼法式小館成立於 2015 年，致力於將正統法式料理的精髓帶入台灣。我們相信，真正的美食不只是味覺的享受，更是一種生活態度的展現。</p>
+        <p>每一道料理都經過主廚精心烹調，選用最新鮮的食材，融合法式傳統與現代創意，為每一位貴賓帶來獨特的餐饗體驗。在這裡，每一次用餐都是一場感官的旅程。</p>
+        <div class="about-features">
+          <div class="feature-item">
+            <div class="feature-icon">✦</div>
+            <span class="feature-text">精選時令食材</span>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">✦</div>
+            <span class="feature-text">主廚私房料理</span>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">✦</div>
+            <span class="feature-text">精選葡萄酒</span>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">✦</div>
+            <span class="feature-text">浪漫氛圍</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu Section -->
+  <section class="section menu" id="menu">
+    <div class="section-header">
+      <div class="section-label">SIGNATURE DISHES</div>
+      <h2 class="section-title">招牌菜色</h2>
+      <div class="section-line"></div>
+      <p class="section-desc">每一道料理都是主廚對法式料理的熱情與堅持，邀請您細細品味</p>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-card">
+        <div class="menu-image">
+          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80" alt="香煎鵝肝">
+        </div>
+        <div class="menu-info">
+          <div class="menu-category">前菜</div>
+          <h3 class="menu-name">香煎法國鵝肝</h3>
+          <p class="menu-desc">精選法國進口鵝肝，搭配波特酒醬汁與焦糖蘋果，入口即化的奢華美味</p>
+        </div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-image">
+          <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=600&q=80" alt="龍蝦濃湯">
+        </div>
+        <div class="menu-info">
+          <div class="menu-category">湯品</div>
+          <h3 class="menu-name">法式龍蝦濃湯</h3>
+          <p class="menu-desc">新鮮龍蝦熬煮而成的濃郁湯底，佐以奶油烤麵包丁，溫潤滑順</p>
+        </div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-image">
+          <img src="https://images.unsplash.com/photo-1558030006-450675393462?w=600&q=80" alt="勃根地田螺">
+        </div>
+        <div class="menu-info">
+          <div class="menu-category">經典</div>
+          <h3 class="menu-name">勃根地田螺</h3>
+          <p class="menu-desc">傳統法式田螺料理，搭配蒜香奶油與香草，每一口都是經典滋味</p>
+        </div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-image">
+          <img src="https://images.unsplash.com/photo-1559847844-5315695dadae?w=600&q=80" alt="戰斧牛排">
+        </div>
+        <div class="menu-info">
+          <div class="menu-category">主菜</div>
+          <h3 class="menu-name">香烤戰斧牛排</h3>
+          <p class="menu-desc">精選 PRIME 等級牛排，低溫慢烤後香煎，配以松露薯條與紅酒醬汁</p>
+        </div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-image">
+          <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=600&q=80" alt="法式千層">
+        </div>
+        <div class="menu-info">
+          <div class="menu-category">甜點</div>
+          <h3 class="menu-name">法式千層酥</h3>
+          <p class="menu-desc">手工酥皮層層疊疊，夾入香緹奶油與焦糖布蕾，酥脆香甜完美結尾</p>
+        </div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-image">
+          <img src="https://images.unsplash.com/photo-1579954115545-a95591f28bfc?w=600&q=80" alt="焦糖布蕾">
+        </div>
+        <div class="menu-info">
+          <div class="menu-category">甜點</div>
+          <h3 class="menu-name">傳統焦糖布蕾</h3>
+          <p class="menu-desc">法式經典甜點，上層脆烤焦糖搭配底下滑順布蕾，擊碎焦糖的瞬間最為迷人</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section contact" id="contact">
+    <div class="section-header">
+      <div class="section-label">CONTACT US</div>
+      <h2 class="section-title">聯絡資訊</h2>
+      <div class="section-line"></div>
+      <p class="section-desc">期待您的蒞臨，請提前預約以確保座位</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <div class="contact-icon">✆</div>
+        <div class="contact-label">電話</div>
+        <div class="contact-value">
+          (02) 2771-5566<br>
+          訂位專線
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">✐</div>
+        <div class="contact-label">地址</div>
+        <div class="contact-value">
+          台北市大安區<br>
+          安和路一段 128 號
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">◔</div>
+        <div class="contact-label">營業時間</div>
+        <div class="contact-value">
+          週二至週日<br>
+          18:00 - 22:30<br>
+          <small>週一公休</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map Section -->
+  <section class="map-section">
+    <div class="map-overlay">
+      <h3>前來品嚐</h3>
+      <p>距離捷運忠孝敦化站步行約 5 分鐘</p>
+      <a href="https://maps.google.com/?q=台北市大安區安和路一段128號" target="_blank" class="map-btn">查看地圖</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-logo">Pisoni</div>
+    <div class="footer-tagline">優雅法式生活</div>
+    <div class="footer-links">
+      <a href="#about">品牌故事</a>
+      <a href="#menu">招牌菜色</a>
+      <a href="#contact">聯絡我們</a>
+      <a href="#contact">訂位</a>
+    </div>
+    <div class="footer-copyright">
+      © 2024 皮索尼法式小館 Pisoni French Bistro. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', function() {
+      menuToggle.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+
+    // Close menu when clicking a link
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', function() {
+        menuToggle.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const offsetTop = target.offsetTop - 80;
+          window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
