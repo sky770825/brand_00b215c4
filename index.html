@@ -5,42 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>皮索尼法式小館 | Pisoni French Bistro</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    .hero-img {
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.08);
-    }
-      --bg-primary: #fafafa;
-      --bg-secondary: #ffffff;
-      --bg-card: #ffffff;
-      --bg-elevated: #f5f5f7;
-      --text-primary: #1d1d1f;
-      --text-secondary: #6e6e73;
-      --text-muted: #86868b;
-      --accent: #a855a8;
-      --accent-light: #f3e8f6;
-      --border: rgba(0,0,0,0.08);
-      --border-strong: rgba(0,0,0,0.12);
-      --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
-      --shadow-lg: 0 8px 30px rgba(0,0,0,0.06);
-      --radius: 12px;
-      --radius-sm: 8px;
+    /* Stripe Design System Tokens */
+    :root {
+      --stripe-ink: #0d253d;
+      --stripe-primary: #533afd;
+      --stripe-primary-hover: #3f2ce0;
+      --stripe-bg: #f6f9fc;
+      --stripe-bg-elevated: #ffffff;
+      --stripe-bg-subdued: #f4f7fb;
+      --stripe-border: #e8eef5;
+      --stripe-border-strong: #d0d9e4;
+      --stripe-text: #0d253d;
+      --stripe-text-secondary: #4a5568;
+      --stripe-text-muted: #8898aa;
+      --stripe-shadow: 0 1px 2px rgba(13,37,61,0.04), 0 4px 8px rgba(13,37,61,0.03);
+      --stripe-shadow-lg: 0 8px 24px rgba(13,37,61,0.08);
+      --stripe-radius: 8px;
+      --stripe-radius-sm: 6px;
+      --stripe-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg-primary);
-      color: var(--text-primary);
-      line-height: 1.5;
+      font-family: var(--stripe-font);
+      background: var(--stripe-bg);
+      color: var(--stripe-text);
+      font-weight: 300;
+      line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       min-height: 100vh;
+      letter-spacing: -0.01em;
     }
 
     .container {
@@ -51,71 +48,70 @@
 
     /* Header */
     header {
-      border-bottom: 1px solid var(--border);
-      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--stripe-border);
+      background: rgba(255,255,255,0.92);
       position: sticky;
       top: 0;
       z-index: 100;
       backdrop-filter: blur(20px);
-      background: rgba(255,255,255,0.85);
+      -webkit-backdrop-filter: blur(20px);
     }
 
     .header-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 14px 20px;
+      padding: 16px 20px;
       max-width: 960px;
       margin: 0 auto;
     }
 
     .logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 600;
-      letter-spacing: -0.02em;
-      color: var(--text-primary);
+      letter-spacing: -0.025em;
+      color: var(--stripe-ink);
     }
 
     .logo-en {
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 500;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--text-muted);
+      color: var(--stripe-text-muted);
       display: block;
       margin-top: 1px;
     }
 
     .nav-links {
       display: flex;
-      gap: 24px;
+      gap: 28px;
     }
 
     .nav-links a {
       font-size: 13px;
       font-weight: 500;
-      color: var(--text-secondary);
+      color: var(--stripe-text-secondary);
       text-decoration: none;
       transition: color 0.15s;
+      letter-spacing: -0.005em;
     }
 
-    .nav-links a:hover { color: var(--text-primary); }
+    .nav-links a:hover { color: var(--stripe-ink); }
 
     /* Hero */
     .hero {
-      padding: 60px 0 48px;
+      padding: 64px 0 56px;
       text-align: center;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--stripe-border);
     }
 
     .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: var(--accent-light);
-      color: var(--accent);
+      background: rgba(83,90,253,0.08);
+      color: var(--stripe-primary);
       font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.08em;
@@ -126,66 +122,82 @@
     }
 
     .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(32px, 6vw, 52px);
-      font-weight: 600;
+      font-size: clamp(30px, 6vw, 48px);
+      font-weight: 300;
       letter-spacing: -0.03em;
       line-height: 1.1;
       margin-bottom: 8px;
+      color: var(--stripe-ink);
     }
 
     .hero-sub {
       font-size: 15px;
-      color: var(--text-secondary);
+      font-weight: 300;
+      color: var(--stripe-text-secondary);
       margin-bottom: 28px;
+      letter-spacing: -0.005em;
     }
 
     .hero-info {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .info-chip {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      padding: 6px 14px;
-      border-radius: 8px;
+      background: var(--stripe-bg-elevated);
+      border: 1px solid var(--stripe-border);
+      padding: 7px 14px;
+      border-radius: var(--stripe-radius-sm);
       font-size: 13px;
-      color: var(--text-secondary);
+      font-weight: 400;
+      color: var(--stripe-text-secondary);
+      letter-spacing: -0.005em;
     }
 
-    .info-chip svg { width: 14px; height: 14px; opacity: 0.6; }
+    .info-chip svg { width: 14px; height: 14px; opacity: 0.5; }
+
+    /* Hero Image */
+    .hero-img {
+      width: 100%;
+      max-width: 800px;
+      height: 280px;
+      object-fit: cover;
+      border-radius: var(--stripe-radius);
+      margin-bottom: 24px;
+      box-shadow: var(--stripe-shadow-lg);
+    }
 
     /* Section titles */
     .section {
       padding: 40px 0;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--stripe-border);
     }
 
     .section-header {
       display: flex;
       align-items: baseline;
       justify-content: space-between;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .section-title {
-      font-size: 13px;
+      font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--text-muted);
+      color: var(--stripe-text-muted);
     }
 
     .section-count {
-      font-size: 12px;
-      color: var(--text-muted);
-      background: var(--bg-elevated);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--stripe-text-muted);
+      background: var(--stripe-bg-subdued);
       padding: 2px 8px;
       border-radius: 6px;
     }
@@ -194,7 +206,7 @@
     .menu-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
+      gap: 10px;
     }
 
     @media (max-width: 600px) {
@@ -202,16 +214,16 @@
     }
 
     .menu-item {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
+      background: var(--stripe-bg-elevated);
+      border: 1px solid var(--stripe-border);
+      border-radius: var(--stripe-radius);
       padding: 18px 20px;
       transition: box-shadow 0.2s, border-color 0.2s;
     }
 
     .menu-item:hover {
-      box-shadow: var(--shadow);
-      border-color: var(--border-strong);
+      box-shadow: var(--stripe-shadow);
+      border-color: var(--stripe-border-strong);
     }
 
     .menu-category {
@@ -219,38 +231,42 @@
       font-weight: 600;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--accent);
+      color: var(--stripe-primary);
       margin-bottom: 6px;
     }
 
     .menu-name {
       font-size: 15px;
-      font-weight: 600;
-      color: var(--text-primary);
+      font-weight: 500;
+      color: var(--stripe-ink);
       margin-bottom: 4px;
+      letter-spacing: -0.01em;
     }
 
     .menu-desc {
       font-size: 12px;
-      color: var(--text-muted);
+      font-weight: 300;
+      color: var(--stripe-text-muted);
       line-height: 1.5;
       margin-bottom: 10px;
     }
 
     .menu-price {
       font-size: 16px;
-      font-weight: 700;
-      color: var(--text-primary);
+      font-weight: 600;
+      color: var(--stripe-ink);
+      letter-spacing: -0.02em;
     }
 
     /* Featured */
     .featured-card {
-      background: linear-gradient(135deg, #2a1a2e 0%, #1a1520 100%);
-      border-radius: var(--radius);
+      background: var(--stripe-ink);
+      border-radius: var(--stripe-radius);
       padding: 28px;
       color: white;
       position: relative;
       overflow: hidden;
+      margin-bottom: 16px;
     }
 
     .featured-card::before {
@@ -260,7 +276,7 @@
       right: -30%;
       width: 300px;
       height: 300px;
-      background: radial-gradient(circle, rgba(168,85,168,0.15) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(83,90,253,0.2) 0%, transparent 70%);
       pointer-events: none;
     }
 
@@ -269,34 +285,37 @@
       font-weight: 600;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
+      color: rgba(255,255,255,0.45);
       margin-bottom: 8px;
     }
 
     .featured-name {
-      font-family: 'Playfair Display', serif;
       font-size: 22px;
-      font-weight: 600;
+      font-weight: 300;
+      letter-spacing: -0.025em;
       margin-bottom: 6px;
+      color: white;
     }
 
     .featured-desc {
       font-size: 13px;
-      color: rgba(255,255,255,0.6);
+      font-weight: 300;
+      color: rgba(255,255,255,0.55);
       margin-bottom: 16px;
       line-height: 1.5;
     }
 
     .featured-price {
       font-size: 28px;
-      font-weight: 700;
+      font-weight: 600;
+      letter-spacing: -0.03em;
     }
 
     /* Features grid */
     .features-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
+      gap: 10px;
     }
 
     @media (max-width: 600px) {
@@ -304,18 +323,18 @@
     }
 
     .feature-item {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 16px;
+      background: var(--stripe-bg-elevated);
+      border: 1px solid var(--stripe-border);
+      border-radius: var(--stripe-radius-sm);
+      padding: 18px 16px;
       text-align: center;
     }
 
     .feature-icon {
       width: 32px;
       height: 32px;
-      background: var(--accent-light);
-      border-radius: 8px;
+      background: rgba(83,90,253,0.08);
+      border-radius: var(--stripe-radius-sm);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -325,15 +344,16 @@
 
     .feature-name {
       font-size: 12px;
-      font-weight: 600;
-      color: var(--text-primary);
+      font-weight: 500;
+      color: var(--stripe-ink);
+      letter-spacing: -0.01em;
     }
 
     /* Info rows */
     .info-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
+      gap: 10px;
     }
 
     @media (max-width: 600px) {
@@ -341,9 +361,9 @@
     }
 
     .info-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
+      background: var(--stripe-bg-elevated);
+      border: 1px solid var(--stripe-border);
+      border-radius: var(--stripe-radius-sm);
       padding: 18px;
     }
 
@@ -352,39 +372,44 @@
       font-weight: 600;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--text-muted);
+      color: var(--stripe-text-muted);
       margin-bottom: 6px;
     }
 
     .info-card-value {
       font-size: 14px;
-      font-weight: 500;
-      color: var(--text-primary);
+      font-weight: 400;
+      color: var(--stripe-ink);
+      letter-spacing: -0.01em;
+      line-height: 1.5;
     }
 
     /* CTA */
     .cta-section {
-      padding: 48px 0;
+      padding: 56px 0;
       text-align: center;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--stripe-border);
     }
 
     .cta-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 28px;
-      font-weight: 600;
+      font-size: 26px;
+      font-weight: 300;
+      letter-spacing: -0.03em;
       margin-bottom: 8px;
+      color: var(--stripe-ink);
     }
 
     .cta-sub {
       font-size: 14px;
-      color: var(--text-secondary);
-      margin-bottom: 24px;
+      font-weight: 300;
+      color: var(--stripe-text-secondary);
+      margin-bottom: 28px;
+      letter-spacing: -0.005em;
     }
 
     .cta-buttons {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       justify-content: center;
       flex-wrap: wrap;
     }
@@ -394,60 +419,58 @@
       align-items: center;
       gap: 6px;
       padding: 11px 22px;
-      border-radius: 10px;
+      border-radius: var(--stripe-radius-sm);
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 500;
       text-decoration: none;
       transition: all 0.15s;
       cursor: pointer;
       border: none;
+      letter-spacing: -0.01em;
     }
 
     .btn-primary {
-      background: var(--text-primary);
+      background: var(--stripe-primary);
       color: white;
     }
 
-    .btn-primary:hover { background: #000; }
+    .btn-primary:hover { background: var(--stripe-primary-hover); }
 
     .btn-secondary {
-      background: var(--bg-elevated);
-      color: var(--text-primary);
-      border: 1px solid var(--border);
+      background: var(--stripe-bg-elevated);
+      color: var(--stripe-ink);
+      border: 1px solid var(--stripe-border);
     }
 
-    .btn-secondary:hover { background: var(--border); }
+    .btn-secondary:hover { background: var(--stripe-bg-subdued); border-color: var(--stripe-border-strong); }
 
     /* Footer */
     footer {
-      padding: 32px 0;
+      padding: 36px 0;
       text-align: center;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--stripe-border);
     }
 
     .footer-brand {
-      font-family: 'Playfair Display', serif;
       font-size: 18px;
-      font-weight: 600;
+      font-weight: 400;
+      letter-spacing: -0.025em;
       margin-bottom: 4px;
+      color: var(--stripe-ink);
     }
 
     .footer-sub {
       font-size: 12px;
-      color: var(--text-muted);
+      font-weight: 300;
+      color: var(--stripe-text-muted);
       margin-bottom: 16px;
+      letter-spacing: -0.005em;
     }
 
     .footer-copy {
       font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    /* Divider */
-    .divider {
-      height: 1px;
-      background: var(--border);
-      margin: 0;
+      font-weight: 400;
+      color: var(--stripe-text-muted);
     }
 
     /* Mobile nav */
@@ -476,7 +499,6 @@
 
 <section class="hero">
   <div class="container">
-    <img src="hero.png" alt="皮索尼法式小館戰斧牛排" class="hero-img">
     <div class="hero-badge">
       <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="currentColor" stroke-width="1.5"/><circle cx="5" cy="5" r="1.5" fill="currentColor"/></svg>
       法式餐酒館
@@ -497,6 +519,7 @@
         (02) 2771-5566
       </div>
     </div>
+    <img src="hero.png" alt="皮索尼法式小館戰斧牛排" class="hero-img">
   </div>
 </section>
 
@@ -508,7 +531,7 @@
     </div>
 
     <!-- Featured Item -->
-    <div class="featured-card" style="margin-bottom: 16px;">
+    <div class="featured-card">
       <div class="featured-label">主菜 · Signature</div>
       <div class="featured-name">香烤戰斧牛排</div>
       <div class="featured-desc">PRIME 等級 · 松露薯條 · 紅酒醬汁</div>
@@ -593,7 +616,7 @@
       </div>
       <div class="info-card">
         <div class="info-card-label">營業時間</div>
-        <div class="info-card-value">週二至週日<br>18:00–22:30<br><span style="color: var(--text-muted); font-size: 11px;">週一公休</span></div>
+        <div class="info-card-value">週二至週日<br>18:00–22:30<br><span style="color: var(--stripe-text-muted); font-size: 11px;">週一公休</span></div>
       </div>
     </div>
   </div>
@@ -604,7 +627,7 @@
     <div class="cta-title">即刻預訂</div>
     <p class="cta-sub">請致電 (02) 2771-5566 預約您的法式之旅</p>
     <div class="cta-buttons">
-      <a href="tel:+886227715566" class="btn btn-primary">
+      <a href="tel:+886****5566" class="btn btn-primary">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         致電訂位
       </a>
