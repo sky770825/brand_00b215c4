@@ -3,923 +3,618 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>皮索尼法式小館 | Pisoni 法式料理</title>
+  <title>皮索尼法式小館 | Pisoni French Bistro</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   <style>
-    /* ===== Reset & Base ===== */
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     :root {
-      --color-cream: #FAF6F0;
-      --color-gold: #C9A96E;
-      --color-gold-light: #E8D5B0;
-      --color-burgundy: #722F37;
-      --color-navy: #1B2A4A;
-      --color-text: #2C2C2C;
-      --color-text-light: #666666;
-      --font-heading: 'Playfair Display', serif;
-      --font-body: 'Noto Sans TC', sans-serif;
+      --bg-primary: #fafafa;
+      --bg-secondary: #ffffff;
+      --bg-card: #ffffff;
+      --bg-elevated: #f5f5f7;
+      --text-primary: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --text-muted: #86868b;
+      --accent: #a855a8;
+      --accent-light: #f3e8f6;
+      --border: rgba(0,0,0,0.08);
+      --border-strong: rgba(0,0,0,0.12);
+      --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
+      --shadow-lg: 0 8px 30px rgba(0,0,0,0.06);
+      --radius: 12px;
+      --radius-sm: 8px;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: var(--font-body);
-      background-color: var(--color-cream);
-      color: var(--color-text);
-      line-height: 1.8;
-      font-weight: 300;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
     }
 
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block;
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 20px;
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-      transition: color 0.3s ease;
-    }
-
-    /* ===== Navigation ===== */
-    .navbar {
-      position: fixed;
+    /* Header */
+    header {
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-secondary);
+      position: sticky;
       top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      padding: 1rem 2rem;
+      z-index: 100;
+      backdrop-filter: blur(20px);
+      background: rgba(255,255,255,0.85);
+    }
+
+    .header-inner {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.6), transparent);
-      transition: background 0.3s ease;
+      justify-content: space-between;
+      padding: 14px 20px;
+      max-width: 960px;
+      margin: 0 auto;
     }
 
-    .navbar.scrolled {
-      background: rgba(27, 42, 74, 0.95);
-      backdrop-filter: blur(10px);
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
     }
 
-    .nav-logo {
-      font-family: var(--font-heading);
-      font-size: 1.5rem;
-      color: #fff;
-      letter-spacing: 2px;
+    .logo-en {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 1px;
     }
 
     .nav-links {
       display: flex;
-      gap: 2.5rem;
-      list-style: none;
+      gap: 24px;
     }
 
     .nav-links a {
-      color: #fff;
-      font-size: 0.9rem;
-      letter-spacing: 1px;
-      position: relative;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.15s;
     }
 
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: var(--color-gold);
-      transition: width 0.3s ease;
-    }
+    .nav-links a:hover { color: var(--text-primary); }
 
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    .nav-reserve {
-      padding: 0.5rem 1.5rem;
-      border: 1px solid var(--color-gold);
-      color: var(--color-gold) !important;
-      transition: all 0.3s ease !important;
-    }
-
-    .nav-reserve:hover {
-      background: var(--color-gold);
-      color: var(--color-navy) !important;
-    }
-
-    .nav-reserve::after {
-      display: none !important;
-    }
-
-    .menu-toggle {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      z-index: 1001;
-    }
-
-    .menu-toggle span {
-      width: 25px;
-      height: 2px;
-      background: #fff;
-      transition: all 0.3s ease;
-    }
-
-    /* ===== Hero Section ===== */
+    /* Hero */
     .hero {
-      height: 100vh;
-      min-height: 600px;
-      background: linear-gradient(rgba(27, 42, 74, 0.5), rgba(27, 42, 74, 0.5)),
-                  url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80') center/cover no-repeat;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      padding: 60px 0 48px;
       text-align: center;
-      color: #fff;
-      position: relative;
-    }
-
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 150px;
-      background: linear-gradient(to top, var(--color-cream), transparent);
+      border-bottom: 1px solid var(--border);
     }
 
     .hero-badge {
-      font-size: 0.85rem;
-      letter-spacing: 4px;
-      color: var(--color-gold);
-      margin-bottom: 1.5rem;
-      text-transform: uppercase;
-    }
-
-    .hero-title {
-      font-family: var(--font-heading);
-      font-size: clamp(2.5rem, 6vw, 5rem);
-      font-weight: 400;
-      letter-spacing: 8px;
-      margin-bottom: 0.5rem;
-    }
-
-    .hero-subtitle {
-      font-family: var(--font-heading);
-      font-size: clamp(1rem, 2vw, 1.3rem);
-      font-style: italic;
-      font-weight: 400;
-      color: var(--color-gold-light);
-      letter-spacing: 3px;
-      margin-bottom: 2rem;
-    }
-
-    .hero-tagline {
-      font-size: 1.1rem;
-      letter-spacing: 6px;
-      color: rgba(255,255,255,0.8);
-      margin-bottom: 3rem;
-    }
-
-    .hero-cta {
-      display: inline-block;
-      padding: 1rem 3rem;
-      background: var(--color-gold);
-      color: var(--color-navy);
-      font-size: 0.9rem;
-      letter-spacing: 2px;
-      transition: all 0.3s ease;
-    }
-
-    .hero-cta:hover {
-      background: #fff;
-      transform: translateY(-2px);
-    }
-
-    .scroll-indicator {
-      position: absolute;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
+      display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      color: var(--color-navy);
-      font-size: 0.75rem;
-      letter-spacing: 2px;
-      z-index: 2;
+      gap: 6px;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 20px;
+      margin-bottom: 20px;
     }
 
-    .scroll-indicator::after {
-      content: '';
-      width: 1px;
-      height: 40px;
-      background: var(--color-gold);
-      animation: scrollLine 1.5s ease-in-out infinite;
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 6vw, 52px);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 8px;
     }
 
-    @keyframes scrollLine {
-      0%, 100% { transform: scaleY(0.5); opacity: 0.3; }
-      50% { transform: scaleY(1); opacity: 1; }
+    .hero-sub {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-bottom: 28px;
     }
 
-    /* ===== Section Common ===== */
+    .hero-info {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .info-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .info-chip svg { width: 14px; height: 14px; opacity: 0.6; }
+
+    /* Section titles */
     .section {
-      padding: 6rem 2rem;
+      padding: 40px 0;
+      border-bottom: 1px solid var(--border);
     }
 
     .section-header {
-      text-align: center;
-      margin-bottom: 4rem;
-    }
-
-    .section-label {
-      font-size: 0.8rem;
-      letter-spacing: 4px;
-      color: var(--color-gold);
-      text-transform: uppercase;
-      margin-bottom: 1rem;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 24px;
     }
 
     .section-title {
-      font-family: var(--font-heading);
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 400;
-      color: var(--color-navy);
-      margin-bottom: 1rem;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
     }
 
-    .section-line {
-      width: 60px;
-      height: 1px;
-      background: var(--color-gold);
-      margin: 1.5rem auto;
+    .section-count {
+      font-size: 12px;
+      color: var(--text-muted);
+      background: var(--bg-elevated);
+      padding: 2px 8px;
+      border-radius: 6px;
     }
 
-    .section-desc {
-      max-width: 600px;
-      margin: 0 auto;
-      color: var(--color-text-light);
-      font-size: 0.95rem;
-    }
-
-    /* ===== About Section ===== */
-    .about {
-      background: #fff;
-    }
-
-    .about-container {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-    }
-
-    .about-image {
-      position: relative;
-    }
-
-    .about-image img {
-      width: 100%;
-      aspect-ratio: 4/5;
-      object-fit: cover;
-    }
-
-    .about-image::before {
-      content: '';
-      position: absolute;
-      top: -20px;
-      left: -20px;
-      right: 20px;
-      bottom: 20px;
-      border: 1px solid var(--color-gold);
-      z-index: -1;
-    }
-
-    .about-content {
-      padding: 1rem 0;
-    }
-
-    .about-content .section-label {
-      text-align: left;
-    }
-
-    .about-content h2 {
-      font-family: var(--font-heading);
-      font-size: 2.2rem;
-      font-weight: 400;
-      color: var(--color-navy);
-      margin-bottom: 1.5rem;
-    }
-
-    .about-content p {
-      color: var(--color-text-light);
-      margin-bottom: 1.5rem;
-      font-size: 0.95rem;
-    }
-
-    .about-features {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      margin-top: 2rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--color-gold-light);
-    }
-
-    .feature-item {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-    }
-
-    .feature-icon {
-      width: 40px;
-      height: 40px;
-      border: 1px solid var(--color-gold);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--color-gold);
-      font-size: 1rem;
-    }
-
-    .feature-text {
-      font-size: 0.9rem;
-      color: var(--color-navy);
-    }
-
-    /* ===== Menu Section ===== */
-    .menu {
-      background: var(--color-cream);
-    }
-
+    /* Menu Grid */
     .menu-grid {
-      max-width: 1200px;
-      margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2.5rem;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
     }
 
-    .menu-card {
-      background: #fff;
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    @media (max-width: 600px) {
+      .menu-grid { grid-template-columns: 1fr; }
     }
 
-    .menu-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(27, 42, 74, 0.1);
+    .menu-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      transition: box-shadow 0.2s, border-color 0.2s;
     }
 
-    .menu-image {
-      aspect-ratio: 1;
-      overflow: hidden;
-    }
-
-    .menu-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-
-    .menu-card:hover .menu-image img {
-      transform: scale(1.05);
-    }
-
-    .menu-info {
-      padding: 1.5rem;
-      text-align: center;
+    .menu-item:hover {
+      box-shadow: var(--shadow);
+      border-color: var(--border-strong);
     }
 
     .menu-category {
-      font-size: 0.7rem;
-      letter-spacing: 3px;
-      color: var(--color-gold);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      margin-bottom: 0.5rem;
+      color: var(--accent);
+      margin-bottom: 6px;
     }
 
     .menu-name {
-      font-family: var(--font-heading);
-      font-size: 1.3rem;
-      color: var(--color-navy);
-      margin-bottom: 0.8rem;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 4px;
     }
 
     .menu-desc {
-      font-size: 0.85rem;
-      color: var(--color-text-light);
-      line-height: 1.7;
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 10px;
     }
 
-    /* ===== Contact Section ===== */
-    .contact {
-      background: var(--color-navy);
-      color: #fff;
+    .menu-price {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
     }
 
-    .contact .section-label {
-      color: var(--color-gold);
+    /* Featured */
+    .featured-card {
+      background: linear-gradient(135deg, #2a1a2e 0%, #1a1520 100%);
+      border-radius: var(--radius);
+      padding: 28px;
+      color: white;
+      position: relative;
+      overflow: hidden;
     }
 
-    .contact .section-title {
-      color: #fff;
+    .featured-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -30%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(168,85,168,0.15) 0%, transparent 70%);
+      pointer-events: none;
     }
 
-    .contact .section-desc {
-      color: rgba(255,255,255,0.7);
+    .featured-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 8px;
     }
 
-    .contact-grid {
-      max-width: 1000px;
-      margin: 0 auto;
+    .featured-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .featured-desc {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .featured-price {
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    /* Features grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    @media (max-width: 600px) {
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .feature-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      text-align: center;
+    }
+
+    .feature-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--accent-light);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 10px;
+      font-size: 14px;
+    }
+
+    .feature-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* Info rows */
+    .info-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 3rem;
-      text-align: center;
+      gap: 12px;
     }
 
-    .contact-item {
-      padding: 2rem;
+    @media (max-width: 600px) {
+      .info-grid { grid-template-columns: 1fr; }
     }
 
-    .contact-icon {
-      width: 60px;
-      height: 60px;
-      border: 1px solid var(--color-gold);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 1.5rem;
-      color: var(--color-gold);
-      font-size: 1.3rem;
+    .info-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 18px;
     }
 
-    .contact-label {
-      font-size: 0.8rem;
-      letter-spacing: 3px;
-      color: var(--color-gold);
+    .info-card-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      margin-bottom: 1rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
     }
 
-    .contact-value {
-      font-size: 1rem;
-      line-height: 1.8;
-      color: rgba(255,255,255,0.9);
+    .info-card-value {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-primary);
     }
 
-    /* ===== Map Section ===== */
-    .map-section {
-      height: 400px;
-      background: linear-gradient(rgba(27, 42, 74, 0.3), rgba(27, 42, 74, 0.3)),
-                  url('https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=1920&q=80') center/cover no-repeat;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .map-overlay {
-      background: #fff;
-      padding: 3rem;
+    /* CTA */
+    .cta-section {
+      padding: 48px 0;
       text-align: center;
-      max-width: 400px;
+      border-bottom: 1px solid var(--border);
     }
 
-    .map-overlay h3 {
-      font-family: var(--font-heading);
-      font-size: 1.5rem;
-      color: var(--color-navy);
-      margin-bottom: 1rem;
+    .cta-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 8px;
     }
 
-    .map-overlay p {
-      color: var(--color-text-light);
-      font-size: 0.9rem;
-      margin-bottom: 1.5rem;
+    .cta-sub {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
     }
 
-    .map-btn {
-      display: inline-block;
-      padding: 0.8rem 2rem;
-      background: var(--color-navy);
-      color: #fff;
-      font-size: 0.85rem;
-      letter-spacing: 1px;
-      transition: background 0.3s ease;
-    }
-
-    .map-btn:hover {
-      background: var(--color-burgundy);
-    }
-
-    /* ===== Footer ===== */
-    .footer {
-      background: #0f1a2e;
-      color: rgba(255,255,255,0.7);
-      padding: 3rem 2rem;
-      text-align: center;
-    }
-
-    .footer-logo {
-      font-family: var(--font-heading);
-      font-size: 1.8rem;
-      color: #fff;
-      margin-bottom: 1rem;
-      letter-spacing: 3px;
-    }
-
-    .footer-tagline {
-      font-size: 0.85rem;
-      letter-spacing: 2px;
-      color: var(--color-gold);
-      margin-bottom: 1.5rem;
-    }
-
-    .footer-links {
+    .cta-buttons {
       display: flex;
+      gap: 12px;
       justify-content: center;
-      gap: 2rem;
-      margin-bottom: 2rem;
       flex-wrap: wrap;
     }
 
-    .footer-links a {
-      font-size: 0.85rem;
-      letter-spacing: 1px;
-      transition: color 0.3s ease;
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 11px 22px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.15s;
+      cursor: pointer;
+      border: none;
     }
 
-    .footer-links a:hover {
-      color: var(--color-gold);
+    .btn-primary {
+      background: var(--text-primary);
+      color: white;
     }
 
-    .footer-copyright {
-      font-size: 0.8rem;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(255,255,255,0.1);
+    .btn-primary:hover { background: #000; }
+
+    .btn-secondary {
+      background: var(--bg-elevated);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
     }
 
-    /* ===== Responsive ===== */
-    @media (max-width: 1024px) {
-      .menu-grid {
-        grid-template-columns: repeat(2, 1fr);
-        max-width: 800px;
-      }
+    .btn-secondary:hover { background: var(--border); }
+
+    /* Footer */
+    footer {
+      padding: 32px 0;
+      text-align: center;
+      border-top: 1px solid var(--border);
     }
 
-    @media (max-width: 768px) {
-      .nav-links {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 70%;
-        max-width: 300px;
-        height: 100vh;
-        background: var(--color-navy);
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 2rem;
-        transition: right 0.3s ease;
-      }
-
-      .nav-links.active {
-        right: 0;
-      }
-
-      .menu-toggle {
-        display: flex;
-      }
-
-      .menu-toggle.active span:nth-child(1) {
-        transform: rotate(45deg) translate(5px, 5px);
-      }
-
-      .menu-toggle.active span:nth-child(2) {
-        opacity: 0;
-      }
-
-      .menu-toggle.active span:nth-child(3) {
-        transform: rotate(-45deg) translate(5px, -5px);
-      }
-
-      .about-container {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-      }
-
-      .about-image {
-        max-width: 400px;
-        margin: 0 auto;
-      }
-
-      .about-content {
-        text-align: center;
-      }
-
-      .about-content .section-label {
-        text-align: center;
-      }
-
-      .about-features {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-      }
-
-      .menu-grid {
-        grid-template-columns: 1fr;
-        max-width: 400px;
-      }
-
-      .contact-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-
-      .contact-item {
-        padding: 1rem;
-      }
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 4px;
     }
 
+    .footer-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .footer-copy {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0;
+    }
+
+    /* Mobile nav */
     @media (max-width: 480px) {
-      .section {
-        padding: 4rem 1.5rem;
-      }
-
-      .hero-tagline {
-        letter-spacing: 3px;
-        font-size: 0.95rem;
-      }
-
-      .about-image::before {
-        top: -10px;
-        left: -10px;
-        right: 10px;
-        bottom: 10px;
-      }
+      .nav-links { display: none; }
+      .hero { padding: 40px 0 32px; }
+      .section { padding: 28px 0; }
     }
   </style>
 </head>
 <body>
-  <!-- Navigation -->
-  <nav class="navbar" id="navbar">
-    <div class="nav-logo">Pisoni</div>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#about">品牌故事</a></li>
-      <li><a href="#menu">招牌菜色</a></li>
-      <li><a href="#contact">聯絡我們</a></li>
-      <li><a href="#contact" class="nav-reserve">立即訂位</a></li>
-    </ul>
-    <div class="menu-toggle" id="menuToggle">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </nav>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-badge">法式餐酒館</div>
-    <h1 class="hero-title">皮索尼法式小館</h1>
-    <p class="hero-subtitle">Pisoni French Bistro</p>
-    <p class="hero-tagline">優雅法式生活</p>
-    <a href="#contact" class="hero-cta">預約訂位</a>
-    <div class="scroll-indicator">
-      <span>SCROLL</span>
+<header>
+  <div class="header-inner">
+    <div>
+      <div class="logo">皮索尼法式小館</div>
+      <span class="logo-en">Pisoni French Bistro</span>
     </div>
-  </section>
+    <nav class="nav-links">
+      <a href="#menu">菜單</a>
+      <a href="#info">資訊</a>
+      <a href="#contact">聯絡</a>
+    </nav>
+  </div>
+</header>
 
-  <!-- About Section -->
-  <section class="section about" id="about">
-    <div class="about-container">
-      <div class="about-image">
-        <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&q=80" alt="皮索尼法式小館內部">
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="currentColor" stroke-width="1.5"/><circle cx="5" cy="5" r="1.5" fill="currentColor"/></svg>
+      法式餐酒館
+    </div>
+    <h1>Pisoni French Bistro</h1>
+    <p class="hero-sub">皮索尼法式小館 · 台北</p>
+    <div class="hero-info">
+      <div class="info-chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        捷運忠孝敦化站步行5分鐘
       </div>
-      <div class="about-content">
-        <div class="section-label">OUR STORY</div>
-        <h2>品味法式的優雅時光</h2>
-        <p>皮索尼法式小館成立於 2015 年，致力於將正統法式料理的精髓帶入台灣。我們相信，真正的美食不只是味覺的享受，更是一種生活態度的展現。</p>
-        <p>每一道料理都經過主廚精心烹調，選用最新鮮的食材，融合法式傳統與現代創意，為每一位貴賓帶來獨特的餐饗體驗。在這裡，每一次用餐都是一場感官的旅程。</p>
-        <div class="about-features">
-          <div class="feature-item">
-            <div class="feature-icon">✦</div>
-            <span class="feature-text">精選時令食材</span>
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon">✦</div>
-            <span class="feature-text">主廚私房料理</span>
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon">✦</div>
-            <span class="feature-text">精選葡萄酒</span>
-          </div>
-          <div class="feature-item">
-            <div class="feature-icon">✦</div>
-            <span class="feature-text">浪漫氛圍</span>
-          </div>
-        </div>
+      <div class="info-chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        週二至週日 18:00–22:30
+      </div>
+      <div class="info-chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        (02) 2771-5566
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Menu Section -->
-  <section class="section menu" id="menu">
+<section class="section" id="menu">
+  <div class="container">
     <div class="section-header">
-      <div class="section-label">SIGNATURE DISHES</div>
-      <h2 class="section-title">招牌菜色</h2>
-      <div class="section-line"></div>
-      <p class="section-desc">每一道料理都是主廚對法式料理的熱情與堅持，邀請您細細品味</p>
+      <span class="section-title">精選菜單</span>
+      <span class="section-count">6 道料理</span>
     </div>
+
+    <!-- Featured Item -->
+    <div class="featured-card" style="margin-bottom: 16px;">
+      <div class="featured-label">主菜 · Signature</div>
+      <div class="featured-name">香烤戰斧牛排</div>
+      <div class="featured-desc">PRIME 等級 · 松露薯條 · 紅酒醬汁</div>
+      <div class="featured-price">$1,280</div>
+    </div>
+
+    <!-- Menu Grid -->
     <div class="menu-grid">
-      <div class="menu-card">
-        <div class="menu-image">
-          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80" alt="香煎鵝肝">
-        </div>
-        <div class="menu-info">
-          <div class="menu-category">前菜</div>
-          <h3 class="menu-name">香煎法國鵝肝</h3>
-          <p class="menu-desc">精選法國進口鵝肝，搭配波特酒醬汁與焦糖蘋果，入口即化的奢華美味</p>
-        </div>
+      <div class="menu-item">
+        <div class="menu-category">前菜</div>
+        <div class="menu-name">香煎法國鵝肝</div>
+        <div class="menu-desc">法國進口鵝肝，波特酒醬汁</div>
+        <div class="menu-price">$380</div>
       </div>
-      <div class="menu-card">
-        <div class="menu-image">
-          <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=600&q=80" alt="龍蝦濃湯">
-        </div>
-        <div class="menu-info">
-          <div class="menu-category">湯品</div>
-          <h3 class="menu-name">法式龍蝦濃湯</h3>
-          <p class="menu-desc">新鮮龍蝦熬煮而成的濃郁湯底，佐以奶油烤麵包丁，溫潤滑順</p>
-        </div>
+      <div class="menu-item">
+        <div class="menu-category">湯品</div>
+        <div class="menu-name">法式龍蝦濃湯</div>
+        <div class="menu-desc">新鮮龍蝦</div>
+        <div class="menu-price">$320</div>
       </div>
-      <div class="menu-card">
-        <div class="menu-image">
-          <img src="https://images.unsplash.com/photo-1558030006-450675393462?w=600&q=80" alt="勃根地田螺">
-        </div>
-        <div class="menu-info">
-          <div class="menu-category">經典</div>
-          <h3 class="menu-name">勃根地田螺</h3>
-          <p class="menu-desc">傳統法式田螺料理，搭配蒜香奶油與香草，每一口都是經典滋味</p>
-        </div>
+      <div class="menu-item">
+        <div class="menu-category">經典</div>
+        <div class="menu-name">勃根地田螺</div>
+        <div class="menu-desc">蒜香奶油</div>
+        <div class="menu-price">$280</div>
       </div>
-      <div class="menu-card">
-        <div class="menu-image">
-          <img src="https://images.unsplash.com/photo-1559847844-5315695dadae?w=600&q=80" alt="戰斧牛排">
-        </div>
-        <div class="menu-info">
-          <div class="menu-category">主菜</div>
-          <h3 class="menu-name">香烤戰斧牛排</h3>
-          <p class="menu-desc">精選 PRIME 等級牛排，低溫慢烤後香煎，配以松露薯條與紅酒醬汁</p>
-        </div>
+      <div class="menu-item">
+        <div class="menu-category">甜點</div>
+        <div class="menu-name">法式千層酥</div>
+        <div class="menu-desc">手工酥皮</div>
+        <div class="menu-price">$220</div>
       </div>
-      <div class="menu-card">
-        <div class="menu-image">
-          <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=600&q=80" alt="法式千層">
-        </div>
-        <div class="menu-info">
-          <div class="menu-category">甜點</div>
-          <h3 class="menu-name">法式千層酥</h3>
-          <p class="menu-desc">手工酥皮層層疊疊，夾入香緹奶油與焦糖布蕾，酥脆香甜完美結尾</p>
-        </div>
-      </div>
-      <div class="menu-card">
-        <div class="menu-image">
-          <img src="https://images.unsplash.com/photo-1579954115545-a95591f28bfc?w=600&q=80" alt="焦糖布蕾">
-        </div>
-        <div class="menu-info">
-          <div class="menu-category">甜點</div>
-          <h3 class="menu-name">傳統焦糖布蕾</h3>
-          <p class="menu-desc">法式經典甜點，上層脆烤焦糖搭配底下滑順布蕾，擊碎焦糖的瞬間最為迷人</p>
-        </div>
+      <div class="menu-item">
+        <div class="menu-category">甜點</div>
+        <div class="menu-name">傳統焦糖布蕾</div>
+        <div class="menu-desc">經典法式甜品</div>
+        <div class="menu-price">$180</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Contact Section -->
-  <section class="section contact" id="contact">
+<section class="section" id="features">
+  <div class="container">
     <div class="section-header">
-      <div class="section-label">CONTACT US</div>
-      <h2 class="section-title">聯絡資訊</h2>
-      <div class="section-line"></div>
-      <p class="section-desc">期待您的蒞臨，請提前預約以確保座位</p>
+      <span class="section-title">餐廳特色</span>
     </div>
-    <div class="contact-grid">
-      <div class="contact-item">
-        <div class="contact-icon">✆</div>
-        <div class="contact-label">電話</div>
-        <div class="contact-value">
-          (02) 2771-5566<br>
-          訂位專線
-        </div>
+    <div class="features-grid">
+      <div class="feature-item">
+        <div class="feature-icon">🌿</div>
+        <div class="feature-name">精選時令食材</div>
       </div>
-      <div class="contact-item">
-        <div class="contact-icon">✐</div>
-        <div class="contact-label">地址</div>
-        <div class="contact-value">
-          台北市大安區<br>
-          安和路一段 128 號
-        </div>
+      <div class="feature-item">
+        <div class="feature-icon">👨‍🍳</div>
+        <div class="feature-name">主廚私房料理</div>
       </div>
-      <div class="contact-item">
-        <div class="contact-icon">◔</div>
-        <div class="contact-label">營業時間</div>
-        <div class="contact-value">
-          週二至週日<br>
-          18:00 - 22:30<br>
-          <small>週一公休</small>
-        </div>
+      <div class="feature-item">
+        <div class="feature-icon">🍷</div>
+        <div class="feature-name">精選葡萄酒</div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🕯️</div>
+        <div class="feature-name">浪漫氛圍</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Map Section -->
-  <section class="map-section">
-    <div class="map-overlay">
-      <h3>前來品嚐</h3>
-      <p>距離捷運忠孝敦化站步行約 5 分鐘</p>
-      <a href="https://maps.google.com/?q=台北市大安區安和路一段128號" target="_blank" class="map-btn">查看地圖</a>
+<section class="section" id="info">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-title">店家資訊</span>
     </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-logo">Pisoni</div>
-    <div class="footer-tagline">優雅法式生活</div>
-    <div class="footer-links">
-      <a href="#about">品牌故事</a>
-      <a href="#menu">招牌菜色</a>
-      <a href="#contact">聯絡我們</a>
-      <a href="#contact">訂位</a>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-card-label">地址</div>
+        <div class="info-card-value">台北市大安區<br>安和路一段128號</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">電話</div>
+        <div class="info-card-value">(02) 2771-5566</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">營業時間</div>
+        <div class="info-card-value">週二至週日<br>18:00–22:30<br><span style="color: var(--text-muted); font-size: 11px;">週一公休</span></div>
+      </div>
     </div>
-    <div class="footer-copyright">
-      © 2024 皮索尼法式小館 Pisoni French Bistro. All rights reserved.
+  </div>
+</section>
+
+<section class="cta-section" id="contact">
+  <div class="container">
+    <div class="cta-title">即刻預訂</div>
+    <p class="cta-sub">請致電 (02) 2771-5566 預約您的法式之旅</p>
+    <div class="cta-buttons">
+      <a href="tel:+886227715566" class="btn btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        致電訂位
+      </a>
+      <a href="https://maps.google.com/?q=台北市大安區安和路一段128號" target="_blank" class="btn btn-secondary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        查看地圖
+      </a>
     </div>
-  </footer>
+  </div>
+</section>
 
-  <script>
-    // Navbar scroll effect
-    window.addEventListener('scroll', function() {
-      const navbar = document.getElementById('navbar');
-      if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
-    });
+<footer>
+  <div class="container">
+    <div class="footer-brand">皮索尼法式小館</div>
+    <div class="footer-sub">Pisoni French Bistro · 台北市大安區安和路一段128號</div>
+    <div class="footer-copy">© 2026 Pisoni French Bistro. All rights reserved.</div>
+  </div>
+</footer>
 
-    // Mobile menu toggle
-    const menuToggle = document.getElementById('menuToggle');
-    const navLinks = document.getElementById('navLinks');
-
-    menuToggle.addEventListener('click', function() {
-      menuToggle.classList.toggle('active');
-      navLinks.classList.toggle('active');
-    });
-
-    // Close menu when clicking a link
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', function() {
-        menuToggle.classList.remove('active');
-        navLinks.classList.remove('active');
-      });
-    });
-
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          const offsetTop = target.offsetTop - 80;
-          window.scrollTo({
-            top: offsetTop,
-            behavior: 'smooth'
-          });
-        }
-      });
-    });
-  </script>
 </body>
 </html>
